@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BITS MTech AIML – Learning Journey</title>
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary:   #1a237e;   /* deep indigo */
+      --accent:    #e53935;   /* BITS red     */
+      --grad-from: #1a237e;
+      --grad-to:   #283593;
+      --card-bg:   #ffffff;
+      --body-bg:   #f0f2f8;
+      --text:      #212121;
+      --muted:     #5c6bc0;
+      --shadow:    0 4px 20px rgba(26,35,126,.12);
+      --radius:    12px;
+      --transition: .25s ease;
+    }
+
+    /* ── Base ── */
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--body-bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Header / Hero ── */
+    header {
+      background: linear-gradient(135deg, var(--grad-from) 0%, #3949ab 60%, #5c6bc0 100%);
+      color: #fff;
+      padding: 3.5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='28' fill='none' stroke='rgba(255,255,255,.06)' stroke-width='1'/%3E%3C/svg%3E") center/60px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .85rem;
+      border-radius: 20px;
+      margin-bottom: 1.1rem;
+    }
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      line-height: 1.15;
+      margin-bottom: .6rem;
+    }
+    header h1 span { color: #ffcc02; }
+    header p.subtitle {
+      font-size: 1.1rem;
+      opacity: .88;
+      max-width: 600px;
+      margin: 0 auto 1.8rem;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat strong { display: block; font-size: 1.7rem; font-weight: 800; }
+    .stat span   { font-size: .8rem; opacity: .8; text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ── Main container ── */
+    main { max-width: 1100px; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+
+    /* ── Section titles ── */
+    .semester-section { margin-bottom: 3.5rem; }
+    .semester-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .semester-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .s1 .semester-badge { background: linear-gradient(135deg,#1a237e,#3949ab); }
+    .s2 .semester-badge { background: linear-gradient(135deg,#b71c1c,#e53935); }
+    .s3 .semester-badge { background: linear-gradient(135deg,#1b5e20,#43a047); }
+
+    .semester-header h2 { font-size: 1.45rem; font-weight: 700; color: var(--primary); }
+    .semester-header p  { font-size: .88rem; color: #666; }
+
+    /* ── Course grid ── */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── Course card ── */
+    .course-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.4rem 1.5rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+      color: inherit;
+      border-left: 4px solid transparent;
+    }
+    .s1 .course-card { border-left-color: #3949ab; }
+    .s2 .course-card { border-left-color: #e53935; }
+    .s3 .course-card { border-left-color: #43a047; }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(26,35,126,.18);
+    }
+    .course-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .course-card h3 {
+      font-size: .97rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+    .course-card p {
+      font-size: .82rem;
+      color: #666;
+      flex: 1;
+    }
+    .course-link-label {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .course-link-label::after { content: '→'; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: .82rem;
+      color: #888;
+      border-top: 1px solid #dde;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .hero-stats { gap: 1.5rem; }
+      .course-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<header>
+  <div class="hero-badge">MTech · AIML · BITS Pilani</div>
+  <h1>My <span>AI &amp; ML</span> Learning Journey</h1>
+  <p class="subtitle">
+    Notes, projects and resources from my MTech in Artificial Intelligence &amp;
+    Machine Learning at BITS Pilani — organised semester by semester.
+  </p>
+  <div class="hero-stats">
+    <div class="stat"><strong>3</strong><span>Semesters</span></div>
+    <div class="stat"><strong>15</strong><span>Courses</span></div>
+    <div class="stat"><strong>∞</strong><span>Curiosity</span></div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════ -->
+<main>
+
+  <!-- ── Semester 1 ── -->
+  <section class="semester-section s1">
+    <div class="semester-header">
+      <div class="semester-badge">S1</div>
+      <div>
+        <h2>Semester 1 — Foundations</h2>
+        <p>Core mathematics, programming and statistical foundations of AI/ML</p>
+      </div>
+    </div>
+    <div class="course-grid">
+
+      <a href="sem1/mathematical-foundations/" class="course-card">
+        <div class="course-icon">📐</div>
+        <h3>Mathematical Foundations of Data Science</h3>
+        <p>Linear algebra, calculus, probability and statistical inference essentials.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem1/machine-learning/" class="course-card">
+        <div class="course-icon">🤖</div>
+        <h3>Machine Learning</h3>
+        <p>Supervised, unsupervised and semi-supervised learning algorithms and theory.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem1/statistical-methods/" class="course-card">
+        <div class="course-icon">📊</div>
+        <h3>Statistical Methods for Data Science</h3>
+        <p>Hypothesis testing, regression, Bayesian methods and experimental design.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem1/data-structures-algorithms/" class="course-card">
+        <div class="course-icon">🗂️</div>
+        <h3>Data Structures &amp; Algorithms</h3>
+        <p>Algorithm design, complexity analysis and data structure implementations.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem1/python-for-aiml/" class="course-card">
+        <div class="course-icon">🐍</div>
+        <h3>Python for AI/ML</h3>
+        <p>NumPy, Pandas, Matplotlib, Scikit-learn — practical Python for data science.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Semester 2 ── -->
+  <section class="semester-section s2">
+    <div class="semester-header">
+      <div class="semester-badge">S2</div>
+      <div>
+        <h2>Semester 2 — Deep Learning &amp; Applications</h2>
+        <p>Neural networks, advanced models and domain-specific applications</p>
+      </div>
+    </div>
+    <div class="course-grid">
+
+      <a href="sem2/deep-learning/" class="course-card">
+        <div class="course-icon">🧠</div>
+        <h3>Deep Learning</h3>
+        <p>CNNs, RNNs, LSTMs, transformers and neural architecture best practices.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem2/natural-language-processing/" class="course-card">
+        <div class="course-icon">💬</div>
+        <h3>Natural Language Processing</h3>
+        <p>Text preprocessing, embeddings, sequence models, BERT and LLM fine-tuning.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem2/computer-vision/" class="course-card">
+        <div class="course-icon">👁️</div>
+        <h3>Computer Vision</h3>
+        <p>Image processing, object detection, segmentation and generative models.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem2/reinforcement-learning/" class="course-card">
+        <div class="course-icon">🎮</div>
+        <h3>Reinforcement Learning</h3>
+        <p>MDPs, Q-learning, policy gradients and deep RL algorithms.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem2/big-data-analytics/" class="course-card">
+        <div class="course-icon">📦</div>
+        <h3>Big Data Analytics</h3>
+        <p>Hadoop, Spark, distributed ML pipelines and scalable data processing.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Semester 3 ── -->
+  <section class="semester-section s3">
+    <div class="semester-header">
+      <div class="semester-badge">S3</div>
+      <div>
+        <h2>Semester 3 — Advanced Topics &amp; Research</h2>
+        <p>Electives, cutting-edge research and dissertation work</p>
+      </div>
+    </div>
+    <div class="course-grid">
+
+      <a href="sem3/mlops/" class="course-card">
+        <div class="course-icon">⚙️</div>
+        <h3>MLOps &amp; AI in Production</h3>
+        <p>Model serving, CI/CD for ML, monitoring, drift detection and deployment.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem3/generative-ai/" class="course-card">
+        <div class="course-icon">✨</div>
+        <h3>Generative AI</h3>
+        <p>GANs, VAEs, diffusion models and large language model architectures.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem3/responsible-ai/" class="course-card">
+        <div class="course-icon">⚖️</div>
+        <h3>Responsible AI &amp; Ethics</h3>
+        <p>Fairness, explainability, privacy-preserving ML and AI governance.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem3/time-series-forecasting/" class="course-card">
+        <div class="course-icon">📈</div>
+        <h3>Time Series &amp; Forecasting</h3>
+        <p>ARIMA, Prophet, LSTM forecasting and anomaly detection techniques.</p>
+        <span class="course-link-label">Explore notes</span>
+      </a>
+
+      <a href="sem3/dissertation/" class="course-card">
+        <div class="course-icon">🎓</div>
+        <h3>Dissertation / Thesis Project</h3>
+        <p>Research problem, methodology, experiments and final thesis writeup.</p>
+        <span class="course-link-label">Explore project</span>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
+<footer>
+  <p>
+    Built with ❤️ during my
+    <a href="https://www.bits-pilani.ac.in/" target="_blank" rel="noopener">BITS Pilani</a>
+    MTech AIML journey ·
+    <a href="https://github.com/swami-softeon/bits_aiml" target="_blank" rel="noopener">GitHub Repo</a>
+  </p>
+</footer>
+
+</body>
+</html>
